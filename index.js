@@ -35,8 +35,13 @@ app.get("/api/", (_req, res) => {
 });
 
 app.get("/api/:date", (req, res) => {
-  const dateInt = parseInt(req.params.date);
-  const date = new Date(dateInt);
+  let date;
+  if (isNumeric(req.params.date)) {
+    const dateInt = parseInt(req.params.date);
+    date = new Date(dateInt);
+  } else {
+    date = new Date(req.params.date);
+  }  
 
   if (isNaN(date)) {
     res.json({ error : "Invalid Date" });
