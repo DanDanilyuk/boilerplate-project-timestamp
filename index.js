@@ -36,11 +36,11 @@ app.get("/api/", (_req, res) => {
 
 app.get("/api/:date", (req, res) => {
   let date;
-  if (isNumeric(req.params.date)) {
+  if (isNaN(req.params.date)) {
+    date = new Date(req.params.date);
+  } else {
     const dateInt = parseInt(req.params.date);
     date = new Date(dateInt);
-  } else {
-    date = new Date(req.params.date);
   }  
 
   if (isNaN(date)) {
